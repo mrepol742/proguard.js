@@ -70,9 +70,9 @@ export function scanFiles(loc) {
                     let f_content = fs.readFileSync(pre[p].inputDir + "/" + pre[p].name + ".js", "utf8");
                     for (const p1 in pre) {
                         const current_1 = pre[p1];
-                        const regExp = new RegExp('(from "(.*?)' + current_1.name + '.js"|require\("(.*?)' + current_1.name + '.js"\))');
+                        const regExp = new RegExp('(from "(.*?)' + current_1.name + '.js"|require\\("(.*?)' + current_1.name + '.js"\\))');
                         if (regExp.test(f_content)) {
-                            f_content = f_content.replace(regExp, 'from "' + current_1.encryptedName + '.js"').replace(regExp, 'require/("' + current_1.encryptedName + '.js/")');
+                            f_content = f_content.replace(new RegExp('from "(.*?)' + current_1.name + '.js"'), 'from "' + current_1.encryptedName + '.js"').replace(new RegExp('require\\("(.*?)' + current_1.name + '.js"\\)'), 'require\("' + current_1.encryptedName + '.js"\)');
                         }
                     }
                     fs.writeFileSync(
