@@ -19,5 +19,8 @@
     "homepage": "https://github.com/mrepol742/proguard.js#readme",
     "engines": {
         "node": ">=20.x"
+    },
+    "dependencies": {
+        "javascript-obfuscator": "^4.1.0"
     }
 }
