@@ -5,7 +5,10 @@ import js from "javascript-obfuscator";
 let pre = [];
 let index_f;
 
-export function scanFiles(loc, js_options) {
+export function scanFiles(loc, js_options, exclude) {
+    if (!exclude) {
+        exclude = ["/node_modules", "/.git", "/scratch", "/test", "/public"];
+    }
     let packagejs;
     try {
         packagejs = JSON.parse(fs.readFileSync(loc + "/package.json"));
@@ -26,7 +29,7 @@ export function scanFiles(loc, js_options) {
                 for (const file in files) {
                     const fileName = files[file].name;
                     const path = files[file].path;
-                    if (!path.includes("/node_modules") && !path.includes("/.git")) {
+                    if (!exclude.find((p) => path.includes(p))) {
                         if (/\.js$/.test(fileName) && files[file].isFile()) {
                             console.log("JS file found: " + path + "/" + fileName);
                             const _name = fileName.replace(".js", "");
@@ -52,7 +55,7 @@ export function scanFiles(loc, js_options) {
 
                 pre.find((p) => {
                     if (p.inputDir == loc && p.name == "index") {
-                        index_f = p.encryptedName;
+                        index_f = p.encryptedName + ".js";
                     }
                 })
                 packagejs.main = index_f;

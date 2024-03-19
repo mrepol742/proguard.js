@@ -21,6 +21,8 @@ import { scanFiles } from "proguard.js";
 /**
  * @param {string} dir
  * @param {ObfuscatorOptions} inputOptions
+ * @optional
+ * @param {array} excludeFiles
  */
 scanFiles(process.cwd(), {
     /*
@@ -32,4 +34,9 @@ scanFiles(process.cwd(), {
     splitStrings: false,
     stringArray: true,
 });
+
+// another example with exlucudeFiles (src, dist and index.js)
+scanFiles(process.cwd(), { compact: true }, ["/src", "/dist", "/index.js"])
+
+
 ```
