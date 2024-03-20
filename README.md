@@ -1,5 +1,5 @@
 # proguard.js
-This package is not related to proguard use to obfuscate Android APK. It was design like proguard to flatten the package and include the javascript filenames in obfuscation!
+This package is not related to (Guardspace proguard) use to obfuscate & optimize Android APP. It was design like proguard to flatten the package and include the javascript filenames in obfuscation!
 
 ## Installation
 Usig NPM or YARN
@@ -38,5 +38,29 @@ scanFiles(process.cwd(), {
 // another example with exlucudeFiles (src, dist and index.js)
 scanFiles(process.cwd(), { compact: true }, ["/src", "/dist", "/index.js"])
 
+// input
+project ->
+    src ->
+        exam ->
+           cycle.js
+        routes - >
+           test.js
+        this.js
+        do.js
+        what.js
+    index.js
+    package.json
+
+// output
+project-dist ->
+    1adfbbc6...js
+    ca5y77b6...js
+    dak4ffav...js
+    3ab8t36h...js
+    jaaqgn44...js
+    0ab827b9...js
+    package.json
 
 ```
+
+This package is inspired by Guardspace Proguard.
